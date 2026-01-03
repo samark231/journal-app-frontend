@@ -12,6 +12,7 @@ import appLogo from "../assets/logo/logo_64x64.png";
 import useAuthStore from '../store/authStore';
 import useGeneralStore from '../store/generalStore';
 import useJournalStore from '../store/JournalStore';
+import {useShallow} from "zustand/shallow";
 
 function Header() {
   const [searchText, setSearchText] = useState("");
@@ -21,19 +22,12 @@ function Header() {
   const journalFilter = useJournalStore((state)=> state.journalFilter);
   const user = useAuthStore((state) => state.user);
   const logout = useAuthStore((state) => state.logout);
-  const healthCheck = useGeneralStore((state) => state.healthCheck);
-  
-
-  const handleHealthCheck = async () => {
-    setStatus('checking');
-    try {
-      await healthCheck();
-      setStatus('online');
-      setTimeout(() => setStatus('idle'), 3000);
-    } catch (e) {
-      setStatus('error');
-    }
-  };
+  const {backendStatus,handleHealthCheck} = useGeneralStore(useShallow(
+        (state)=>({
+            backendStatus: state.backendStatus,
+            handleHealthCheck:state.handleHealthCheck,
+        })
+    ))
 
   const handleSearch = (e) => {
     setSearchText(e.target.value);
@@ -85,7 +79,7 @@ function Header() {
       <div className={`header-actions ${isMobileSearchOpen ? 'hide-on-mobile' : ''}`}>
         <button 
             onClick={handleHealthCheck} 
-            className={`action-btn status-btn ${status}`}
+            className={`action-btn status-btn ${backendStatus}`}
             title="Check System Status"
         >
           <FontAwesomeIcon icon={faHeartPulse} />

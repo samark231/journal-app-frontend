@@ -97,6 +97,13 @@
     cursor: pointer;
     transition: background-color 0.2s;
     margin-top: 0.5rem;
+    position: relative;
+}
+.logging-in-spinner{
+    position: absolute;
+    top: 15px;
+    left: 13rem;
+    animation: spin 1s linear infinite;
 }
 
 .auth-btn-submit:hover {
@@ -122,4 +129,36 @@
     text-decoration: underline;
     margin-left: 0.3rem;
     padding: 0;
+}
+
+.auth-health-check{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+.auth-health-check-message{
+    text-align: center;
+    font-size: 0.9rem;
+    color: var(--auth-text-light);
+    padding: 0 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.auth-health-check-divider{
+    height: 3rem;
+    background-color: gray;
+    width: 2px;
+
+    
+}
+
+@keyframes spin {
+    from{
+        transform: rotate(0deg);
+    }
+    to{
+        transform: rotate(360deg);
+    }
 }

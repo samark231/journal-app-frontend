@@ -1,8 +1,17 @@
 import React, { useState } from 'react';
 import useAuthStore from '../store/authStore';
+import {useShallow} from "zustand/shallow";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faSpinner } from '@fortawesome/free-solid-svg-icons';
+import "../styles/authPage.css";
 
 function Login() {
-    const login = useAuthStore(state => state.login);
+    const {login, isLoggingIn} = useAuthStore(useShallow(
+        (state)=>({
+            login: state.login,
+            isLoggingIn: state.isLoggingIn,
+        })
+    ));
     const [formData, setFormData] = useState({
         usernameOrEmail: "",
         password: ""
@@ -46,8 +55,11 @@ function Login() {
                     required
                 />
             </div>
-
-            <button className="auth-btn-submit" type="submit">Log In</button>
+            <button className="auth-btn-submit" type="submit">
+                
+                {isLoggingIn?"logging in":"Log In"}
+                {isLoggingIn && <FontAwesomeIcon icon={faSpinner} className='logging-in-spinner'/>}
+            </button>
         </form>
     );
 }

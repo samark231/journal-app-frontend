@@ -9,3 +9,16 @@ body {
 * {
     box-sizing: border-box;
 }
+.loading-page{
+    height: 100dvh;
+    width: 100dvw;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    
+}
+.lp-text{
+    font-size: x-large;
+    margin: 1rem;
+}

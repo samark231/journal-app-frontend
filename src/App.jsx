@@ -3,6 +3,7 @@ import useAuthStore from './store/authStore.js'
 import AuthPage from './pages/Authpage.jsx'
 import HomePage from './pages/HomePage.jsx'
 import {useShallow} from "zustand/react/shallow";
+import Loading from './components/Loading.jsx';
 import "./styles/app.css";
 
 function App() {
@@ -19,7 +20,7 @@ function App() {
   return (
     <>
       {isLoading? 
-        <div>Loading</div>
+        <Loading/>
         :
         <>{user? <HomePage/>:<AuthPage/>}</>
       }

@@ -176,7 +176,7 @@
 
 /* --- Status Animations --- */
 .status-btn.checking { color: #ecc94b; animation: pulse 1s infinite; }
-.status-btn.online { color: #48bb78; }
+.status-btn.OK { color: #48bb78; }
 .status-btn.error { color: #f56565; }
 
 @keyframes pulse {

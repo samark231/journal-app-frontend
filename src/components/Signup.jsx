@@ -1,8 +1,16 @@
 import React, { useState } from "react";
 import useAuthStore from "../store/authStore";
+import { useShallow } from "zustand/shallow";
 
 const Signup = () => {
-    const signup = useAuthStore((state) => state.signup);
+    const {signup, isSigningUp, isLoggingIn} = useAuthStore(useShallow(
+        (state) => ({
+            signup:state.signup,
+            isSigningUp: state.isSigningUp,
+            isLoggingIn:state.isLoggingIn,
+        })
+    ));
+    
     const [formData, setFormData] = useState({
         firstName: "",
         lastName: "",
@@ -85,7 +93,11 @@ const Signup = () => {
                 />
             </div>
 
-            <button className="auth-btn-submit" type="submit">Create Account</button>
+            <button className="auth-btn-submit" type="submit">
+                {isSigningUp?"signing in":"Create Account"}
+                {isLoggingIn && "logging in"}
+                {(isLoggingIn||isSigningUp) && <FontAwesomeIcon icon={faSpinner} className='logging-in-spinner'/>}
+                </button>
         </form>
     );
 };

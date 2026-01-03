@@ -6,34 +6,39 @@ import { persist } from "zustand/middleware";
 const useAuthStore = create(persist(
     (set, get)=>({
         user:null,
-        isLogginIn: false,
+        isLoggingIn: false,
+        isSigningUp:false,
         isLoading:false,
 
         login: async (formData)=>{
             try{
                 // console.log(formData);
-                set({isLogginIn:true});
+                set({isLoggingIn:true});
+                console.log(get().isLoggingIn);
+                await new Promise(resolve => setTimeout(resolve, 5000));
                 const res = await api.post("/public/login", formData);
-                console.log(res);
                 localStorage.setItem("jwt", res.data.token);
                 set({user:res.data.user});
                 // console.log("logged in Successfully.");
             }catch(err){
                 console.log("Error while loggin in: ", err);
             }finally{
-                set({isLogginIn:false});
+                set({isLoggingIn:false});
             }
             
         },
         signup: async (formData)=>{
             // console.log(formData);
             try{
+                set({isSigningUp:true});
                 const res = await api.post("/public/signup", formData);
                 // console.log(res);
                 await get().login({"usernameOrEmail": formData.username, "password": formData.password});
             }catch(err){
                 console.log("Error while signing up:", err.response.data||err);
                 throw err;
+            }finally{
+                set({isSigningUp:false});
             }
         },
 
