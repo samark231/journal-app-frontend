@@ -1,16 +1,143 @@
-# React + Vite
+# 🧠 Slate of Mind (Frontend)
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A modern, responsive journaling application built to help users document their thoughts securely. This is the frontend repository, built with **React** and **Vite**, designed to communicate with a Java Spring Boot backend.
 
-Currently, two official plugins are available:
+## ✨ Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+* **Responsive "Split-View" Design:**
+* **Desktop:** Side-by-side Editor and Journal List for efficient writing and reviewing.
+* **Mobile:** Adaptive stacked layout with a collapsible, app-like header and bottom-heavy touch controls.
 
-## React Compiler
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+* **Smart Search:**
+* Real-time client-side filtering (searches title and content instantly).
+* Mobile-optimized search bar that expands/collapses to save screen real estate.
 
-## Expanding the ESLint configuration
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+* **Journal Management:**
+* Create, view, and save daily entries.
+* Auto-formatted dates using ISO standards (compatible with Java `LocalDateTime`).
+
+
+* **System Status:**
+* Built-in "Heartbeat" check to verify backend connectivity.
+
+
+* **Secure Authentication:**
+* Login/Signup flows with JWT token management (stored in local storage).
+
+
+
+## 🛠️ Tech Stack
+
+* **Framework:** [React](https://reactjs.org/) (v18)
+* **Build Tool:** [Vite](https://vitejs.dev/)
+* **State Management:** [Zustand](https://github.com/pmndrs/zustand) (Auth, Journal Data, General App State)
+* **Styling:** CSS3 (Flexbox/Grid), FontAwesome Icons
+* **HTTP Client:** Axios (Interceptors configured for JWT injection)
+* **Deployment:** Render (Static Site)
+
+## 🚀 Getting Started
+
+Follow these steps to run the project locally.
+
+### Prerequisites
+
+* Node.js (v18 or higher)
+* npm
+
+### Installation
+
+1. **Clone the repository:**
+```bash
+git clone https://github.com/YOUR_USERNAME/journal-app-frontend.git
+cd journal-app-frontend
+
+```
+
+
+2. **Install dependencies:**
+```bash
+npm install
+
+```
+
+
+3. **Configure Environment Variables:**
+Create a `.env` file in the root directory:
+```bash
+touch .env
+
+```
+
+
+Add your backend URL (for local development, this is usually localhost):
+```env
+# .env
+VITE_API_URL=http://localhost:8080
+
+```
+
+
+4. **Run the development server:**
+```bash
+npm run dev
+
+```
+
+
+Open `http://localhost:5173` to view it in the browser.
+
+## 📂 Project Structure
+
+```text
+src/
+├── api/
+│   └── axiosConfig.js       # Global Axios instance with Interceptors
+├── assets/                  # Images, Logos
+├── components/
+│   ├── Header.jsx           # Responsive Header (Mobile logic inside)
+│   ├── JournalCard.jsx      # Individual Entry Display
+│   ├── AddJournal.jsx       # Editor Component
+│   └── PrivateRoute.jsx     # Route Guard
+├── pages/
+│   ├── AuthPage.jsx         # Login/Signup Logic
+│   └── HomePage.jsx         # Main Dashboard (Flexbox Layout)
+├── store/
+│   ├── authStore.js         # User Session State
+│   └── JournalStore.js      # Filtering & Data Logic
+└── styles/                  # Component-specific CSS
+
+```
+
+## 🌐 Deployment (Render)
+
+This project is optimized for deployment on **Render Static Sites**.
+
+1. **Connect Repo:** Link your GitHub repository to a new Static Site service on Render.
+2. **Build Settings:**
+* **Build Command:** `npm run build`
+* **Publish Directory:** `dist`
+
+
+3. **Environment Variables:**
+* Set `VITE_API_URL` to your production backend URL (e.g., `https://my-api.onrender.com`).
+
+
+4. **Rewrite Rule (Crucial for React Router):**
+* Go to **Settings > Redirects/Rewrites**.
+* Add rule: Source `/*` ➝ Destination `/index.html` ➝ Action `Rewrite`.
+
+
+
+## 🤝 Contributing
+
+1. Fork the project.
+2. Create your feature branch (`git checkout -b feature/AmazingFeature`).
+3. Commit your changes (`git commit -m 'Add some AmazingFeature'`).
+4. Push to the branch (`git push origin feature/AmazingFeature`).
+5. Open a Pull Request.
+
+---
+
+*Built by Samar K.*
