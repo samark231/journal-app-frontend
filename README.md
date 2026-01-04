@@ -50,7 +50,7 @@ Follow these steps to run the project locally.
 
 1. **Clone the repository:**
 ```bash
-git clone https://github.com/YOUR_USERNAME/journal-app-frontend.git
+git clone https://github.com/samark231/journal-app-frontend.git
 cd journal-app-frontend
 
 ```
@@ -121,7 +121,7 @@ This project is optimized for deployment on **Render Static Sites**.
 
 
 3. **Environment Variables:**
-* Set `VITE_API_URL` to your production backend URL (e.g., `https://my-api.onrender.com`).
+* Set `VITE_API_BASE_URL` to your production backend URL (e.g., `https://journal-app-nfnl.onrender.com/`).
 
 
 4. **Rewrite Rule (Crucial for React Router):**

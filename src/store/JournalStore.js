@@ -82,6 +82,7 @@ const useJournalStore = create(persist(
         },
         updateJournal: async ()=>{
             try{
+                set({isSavingJournal:true})
                 // console.log("sending put req...");
                 set({newJournalEntry: {
                     ...get().newJournalEntry, date:useGeneralStore.getState().getDateInLocalIsoFormat()
@@ -105,6 +106,8 @@ const useJournalStore = create(persist(
             }catch(err){
                 console.log("Error occured while updating the journal", err);
                 throw err;
+            }finally{
+                set({isSavingJournal:false});
             }
         },
         handleView: (entry)=>{

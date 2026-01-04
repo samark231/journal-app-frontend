@@ -28,7 +28,7 @@ function HomePage() {
                 {/* Right Side: The List */}
                 <section className='homepage-section section-list'>
                     <div className='list-header'>
-                        <h3>Recent Entries</h3>
+                        <h3>All Entries</h3>
                         <span className='entry-count'>{filteredJournals.length} entries</span>
                     </div>
                     
