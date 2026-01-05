@@ -38,7 +38,13 @@ const useJournalStore = create(
                 }})
                 // console.log("this is journal entry with updated date: ",get().newJournalEntry);
                 set({isSavingJournal:true})
-                const res = await api.post("/journal", get().newJournalEntry);
+                const saveJournalPromise = api.post("/journal", get().newJournalEntry);
+                toast.promise(saveJournalPromise, {
+                    loading:"saving new entry...",
+                    success:"Saved",
+                    error:"Could Not save new entry."
+                })
+                const res = await saveJournalPromise;
                 set((state) => ({
                     journals: [res.data, ...state.journals],
                     filteredJournals:[res.data, ...state.filteredJournals]
@@ -61,7 +67,14 @@ const useJournalStore = create(
         deleteJournal: async (journalId)=>{
             try{
                 // console.log(journalId);
-                const res = await api.delete(`/journal/id/${journalId}`);
+
+                const deleteJournalPromise = api.delete(`/journal/id/${journalId}`);
+                toast.promise(deleteJournalPromise,{
+                    loading:"deleting entry...",
+                    success:"deleted",
+                    error:"could not delete entry"
+                })
+                const res = await deleteJournalPromise;
                 set((state)=>({
                     journals: state.journals.filter((entry) => entry.id !== journalId),
                     filteredJournals: state.filteredJournals.filter((entry) => entry.id !== journalId)
@@ -88,7 +101,13 @@ const useJournalStore = create(
                     ...get().newJournalEntry, date:useGeneralStore.getState().getDateInLocalIsoFormat()
                 }})
                 // console.log("this is journal entry with updated date: ",get().newJournalEntry);
-                const res = await api.put(`/journal/id/${get().currentJournalId}`,get().newJournalEntry);
+                const updateJournalPromise = api.put(`/journal/id/${get().currentJournalId}`,get().newJournalEntry);
+                toast.promise(updateJournalPromise,{
+                    loading:"updating...",
+                    success:"updated",
+                    error:"could not update the entry..."
+                })
+                const res = await updateJournalPromise;
                 // console.log(res);
                 set((state)=>({
                     journals: state.journals.map((entry)=>{
