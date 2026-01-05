@@ -1,19 +1,18 @@
 import {create} from "zustand";
-import {persist,createJSONStorage} from "zustand/middleware";
 import api from "../api/axios";
 import { JOURNAL_MODE } from "../utils/utils";
 import useGeneralStore from "./generalStore";
 import toast from "react-hot-toast";
 
-const useJournalStore = create(persist(
-    (set, get)=>({
+const useJournalStore = create(
+     (set, get)=>({
 
         journals: [],
         filteredJournals:[],
         newJournalEntry:{
             title: "",
             content: "",
-            date:" isef"
+            date:""
         },
         currentJournalId:"",
         currentMode: JOURNAL_MODE.NEW,
@@ -153,14 +152,10 @@ const useJournalStore = create(persist(
         cacheReset: ()=>{
             console.log("performing cache reset...");
             set({journals:[]}),
-            localStorage.removeItem("journal-storage");
+            set({filteredJournals:[]});
+            localStorage.removeItem("auth-storage");
         },
-    }),
-    ),
-{
-    name: "journal-storage", // Unique name for LocalStorage key
-    storage: createJSONStorage(() => localStorage), 
-}
-)
+    })
+);
 
 export default useJournalStore;
