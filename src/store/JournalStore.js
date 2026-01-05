@@ -3,6 +3,7 @@ import {persist,createJSONStorage} from "zustand/middleware";
 import api from "../api/axios";
 import { JOURNAL_MODE } from "../utils/utils";
 import useGeneralStore from "./generalStore";
+import toast from "react-hot-toast";
 
 const useJournalStore = create(persist(
     (set, get)=>({
@@ -150,6 +151,7 @@ const useJournalStore = create(persist(
             }
         },
         cacheReset: ()=>{
+            console.log("performing cache reset...");
             set({journals:[]}),
             localStorage.removeItem("journal-storage");
         },
@@ -157,7 +159,7 @@ const useJournalStore = create(persist(
     ),
 {
     name: "journal-storage", // Unique name for LocalStorage key
-    storage: createJSONStorage(() => localStorage), // (Optional) Explicitly set storage
+    storage: createJSONStorage(() => localStorage), 
 }
 )
 

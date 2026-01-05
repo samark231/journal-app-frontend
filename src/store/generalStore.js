@@ -1,6 +1,7 @@
 import {create} from "zustand";
 import api from "../api/axios";
 import {persist,createJSONStorage} from "zustand/middleware";
+import toast from "react-hot-toast";
 
 const useGeneralStore = create((set, get)=>({
     backendStatus:"idle", 
@@ -18,7 +19,13 @@ const useGeneralStore = create((set, get)=>({
     healthCheck: async ()=>{
         try{
             // console.log("sending req for health check");
-            const res = await api.get("/public/health-check");
+            const healthPromise = api.get("/public/health-check");
+            toast.promise(healthPromise, {
+                loading:"trying to wake up Backend...",
+                success:"Backend Online",
+                error:"Backend Offline... please try after some time."
+            })
+            const res = await healthPromise;
             console.log(res);
             return res.data;
         }catch(err){

@@ -2,6 +2,7 @@ import {create} from "zustand";
 import api from "../api/axios";
 import useJournalStore from "./JournalStore";
 import { persist } from "zustand/middleware";
+import toast from "react-hot-toast";
 
 const useAuthStore = create(persist(
     (set, get)=>({
@@ -14,9 +15,15 @@ const useAuthStore = create(persist(
             try{
                 // console.log(formData);
                 set({isLoggingIn:true});
-                console.log(get().isLoggingIn);
-                await new Promise(resolve => setTimeout(resolve, 5000));
-                const res = await api.post("/public/login", formData);
+                // console.log(get().isLoggingIn);
+                // await new Promise(resolve => setTimeout(resolve, 5000));
+                const loginPromise = api.post("/public/login", formData);
+                toast.promise(loginPromise,{
+                    loading:"logging in...",
+                    success:"logged in successfully",
+                    error:"could not log in, check credentials",
+                })
+                const res = await loginPromise;
                 localStorage.setItem("jwt", res.data.token);
                 set({user:res.data.user});
                 // console.log("logged in Successfully.");
@@ -28,10 +35,17 @@ const useAuthStore = create(persist(
             
         },
         signup: async (formData)=>{
-            // console.log(formData);
+            console.log(formData);
             try{
                 set({isSigningUp:true});
-                const res = await api.post("/public/signup", formData);
+                
+                const signupPromise = api.post("/public/signup", formData);
+                toast.promise(signupPromise,{
+                    loading:"signing up...",
+                    success:"Account created",
+                    error:"Could not create your account...",
+                })
+                const res = await signupPromise;
                 // console.log(res);
                 await get().login({"usernameOrEmail": formData.username, "password": formData.password});
             }catch(err){
@@ -47,9 +61,11 @@ const useAuthStore = create(persist(
                 localStorage.removeItem("jwt");
                 set({user:null});
                 useJournalStore.getState().cacheReset();
+                toast.success("Logged out successfully.");
                 // console.log("Logged out successfully.");
             }catch(err){
                 console.log("Error occured while logging out: ", err);
+                toast.error("Error while logging out.");
             }
             
         },

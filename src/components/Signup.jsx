@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import useAuthStore from "../store/authStore";
 import { useShallow } from "zustand/shallow";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faSpinner } from '@fortawesome/free-solid-svg-icons';
 
 const Signup = () => {
     const {signup, isSigningUp, isLoggingIn} = useAuthStore(useShallow(
