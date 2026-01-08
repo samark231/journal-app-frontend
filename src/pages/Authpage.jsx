@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Login from "../components/Login";
 import Signup from "../components/Signup";
 import "../styles/authPage.css"; // Point to the new single CSS file
@@ -19,7 +19,9 @@ const AuthPage = () => {
     const toggleIsLogIn = () => {
         setIsLogIn((prev) => !prev);
     };
-
+    useEffect(()=>{
+        handleHealthCheck();
+    },[])
     return (
         <div className="auth-container">
             <div className="auth-card">

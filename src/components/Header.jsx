@@ -22,10 +22,11 @@ function Header() {
   const journalFilter = useJournalStore((state)=> state.journalFilter);
   const user = useAuthStore((state) => state.user);
   const logout = useAuthStore((state) => state.logout);
-  const {backendStatus,handleHealthCheck} = useGeneralStore(useShallow(
+  const {backendStatus,handleHealthCheck, toggleShowDropdown} = useGeneralStore(useShallow(
         (state)=>({
             backendStatus: state.backendStatus,
             handleHealthCheck:state.handleHealthCheck,
+            toggleShowDropdown:state.toggleShowDropdown,
         })
     ))
 
@@ -91,7 +92,7 @@ function Header() {
         
         <div className="header-divider"></div>
         
-        <div className="user-profile">     
+        <div className="user-profile" onClick={toggleShowDropdown}>     
             <div className="avatar" title={user.firstName}>
                 {getInitials(user.firstName)}
             </div>

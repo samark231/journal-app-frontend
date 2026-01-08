@@ -5,6 +5,7 @@ import toast from "react-hot-toast";
 
 const useGeneralStore = create((set, get)=>({
     backendStatus:"idle", 
+    showDropdown:true,
     handleHealthCheck :async () => {
         set({backendStatus:'checking'});
         try {
@@ -14,7 +15,7 @@ const useGeneralStore = create((set, get)=>({
         } catch (err) {
             console.log("Error In handleHealthCheck ", err);
             set({backendStatus:'error'});
-        }
+        }  
     },
     healthCheck: async ()=>{
         try{
@@ -37,6 +38,12 @@ const useGeneralStore = create((set, get)=>({
         const offset = localDate.getTimezoneOffset() * 60000;
         const localISO = new Date(localDate.getTime() - offset).toISOString().slice(0, -1);
         return localISO;
+    },
+    toggleShowDropdown: ()=>{
+        set({showDropdown: (!get().showDropdown)})
+    }, 
+    handleClickOutSide: ()=>{
+
     }
 }))
 

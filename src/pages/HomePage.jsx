@@ -5,11 +5,14 @@ import Footer from "../components/Footer.jsx";
 import useJournalStore from '../store/JournalStore.js';
 import AddJournal from '../components/AddJournal.jsx';
 import "../styles/homePage.css";
+import Dropdown from '../components/Dropdown.jsx';
+import useGeneralStore from '../store/generalStore.js';
 
 function HomePage() {
     const filteredJournals = useJournalStore(state => state.filteredJournals);
     const getAllJournals = useJournalStore(state => state.getAllJournals);
-    
+    const showDropdown = useGeneralStore(state=>state.showDropdown);
+
     useEffect(() => {
         // console.log("mounting homepage,calling getalljournals...");
         getAllJournals();
@@ -18,7 +21,7 @@ function HomePage() {
     return (
         <div className='homePage-container'>
             <Header />
-            
+            {showDropdown && <Dropdown/>}
             <div className='homePage-main'>
                 {/* Left Side: The Editor */}
                 <section className='homepage-section section-editor'>
