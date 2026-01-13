@@ -12,7 +12,7 @@ const useJournalStore = create(
         newJournalEntry:{
             title: "",
             content: "",
-            date:""
+            // date:""
         },
         currentJournalId:"",
         currentMode: JOURNAL_MODE.NEW,
@@ -24,24 +24,26 @@ const useJournalStore = create(
         getAllJournals: async ()=>{
             try{
                 const res = await api.get("/journal/all-entries");
-                set({journals:res.data});
-                set({filteredJournals:res.data});
+                set({journals:res.data.data});
+                set({filteredJournals:res.data.data});
                 // console.log("gettng all journals...",res.data);
             }catch(err){
                 console.log("Error while fetching all journals", err);
+                toast.error("could not fetch all journals");
             }
         } ,
         saveJournal: async ()=>{
             try{
-                set({newJournalEntry: {
-                    ...get().newJournalEntry, date:useGeneralStore.getState().getDateInLocalIsoFormat()
-                }})
+                // set({newJournalEntry: {
+                //     ...get().newJournalEntry, date:useGeneralStore.getState().getDateInLocalIsoFormat()
+                // }})
                 // console.log("this is journal entry with updated date: ",get().newJournalEntry);
                 set({isSavingJournal:true})
                 const res = await api.post("/journal", get().newJournalEntry);
+                // console.log(res.data);
                 set((state) => ({
-                    journals: [res.data, ...state.journals],
-                    filteredJournals:[res.data, ...state.filteredJournals]
+                    journals: [res.data.data, ...state.journals],
+                    filteredJournals:[res.data.data, ...state.filteredJournals]
                 }));
                 // console.log(get().newJournalEntry);
                 set({newJournalEntry:{
@@ -49,7 +51,7 @@ const useJournalStore = create(
                     content: ""
                 }})
                 // console.log(get().journals);
-                return res.data;
+                return res.data.data;
 
             }catch(err){
                 console.log("Some error occured while saving the entry: ",err);
@@ -61,12 +63,19 @@ const useJournalStore = create(
         deleteJournal: async (journalId)=>{
             try{
                 // console.log(journalId);
-                const res = await api.delete(`/journal/id/${journalId}`);
+                const deletePromise = api.delete(`/journal/id/${journalId}`);
                 set((state)=>({
                     journals: state.journals.filter((entry) => entry.id !== journalId),
                     filteredJournals: state.filteredJournals.filter((entry) => entry.id !== journalId)
                 }))
-                
+                toast.promise(deletePromise,{
+                    loading:"deleting...",
+                    success:"Journal deleted successfully",
+                    error:"could not delete the journal",
+
+                })
+                const res = await deletePromise;
+                // console.log(res.data.data);
             }catch(err){
                 console.log("Error occured while deleting the journal", err);
             }
@@ -84,18 +93,18 @@ const useJournalStore = create(
             try{
                 set({isSavingJournal:true})
                 // console.log("sending put req...");
-                set({newJournalEntry: {
-                    ...get().newJournalEntry, date:useGeneralStore.getState().getDateInLocalIsoFormat()
-                }})
+                // set({newJournalEntry: {
+                //     ...get().newJournalEntry, date:useGeneralStore.getState().getDateInLocalIsoFormat()
+                // }})
                 // console.log("this is journal entry with updated date: ",get().newJournalEntry);
                 const res = await api.put(`/journal/id/${get().currentJournalId}`,get().newJournalEntry);
                 // console.log(res);
                 set((state)=>({
                     journals: state.journals.map((entry)=>{
-                        return entry.id == get().currentJournalId?res.data:entry;
+                        return entry.id == get().currentJournalId?res.data.data:entry;
                     }),
                     filteredJournals: state.filteredJournals.map((entry)=>{
-                        return entry.id == get().currentJournalId?res.data:entry;
+                        return entry.id == get().currentJournalId?res.data.data:entry;
                     })
                 }))
                 set({newJournalEntry:{

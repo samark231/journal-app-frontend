@@ -5,12 +5,12 @@ import toast from "react-hot-toast";
 
 const useGeneralStore = create((set, get)=>({
     backendStatus:"idle", 
-    showDropdown:true,
     handleHealthCheck :async () => {
         set({backendStatus:'checking'});
         try {
             const res = await get().healthCheck();
-            set({backendStatus:res});
+            console.log(res.data);
+            set({backendStatus:res.data});
             setTimeout(() => set({backendStatus:"idle"}), 3000);
         } catch (err) {
             console.log("Error In handleHealthCheck ", err);
@@ -27,7 +27,7 @@ const useGeneralStore = create((set, get)=>({
                 error:"Backend Offline... please try after some time."
             })
             const res = await healthPromise;
-            console.log(res);
+            // console.log(res);
             return res.data;
         }catch(err){
             console.log("Error while checking health of backend: ", err);

@@ -24,9 +24,9 @@ const useAuthStore = create(persist(
                     error:"could not log in, check credentials",
                 })
                 const res = await loginPromise;
-                localStorage.setItem("jwt", res.data.token);
-                set({user:res.data.user});
-                // console.log("logged in Successfully.");
+                console.log(res.data.data);
+                localStorage.setItem("jwt", res.data.data.jwt);
+                set({user:res.data.data.userData});
             }catch(err){
                 console.log("Error while loggin in: ", err);
             }finally{
@@ -46,7 +46,6 @@ const useAuthStore = create(persist(
                     error:"Could not create your account...",
                 })
                 const res = await signupPromise;
-                // console.log(res);
                 await get().login({"usernameOrEmail": formData.username, "password": formData.password});
             }catch(err){
                 console.log("Error while signing up:", err.response.data||err);
@@ -79,8 +78,8 @@ const useAuthStore = create(persist(
                 }
                 const res = await api.get("/user/check-auth");
                 console.log("checking auth...", res.data);
-                set({user:res.data});
-                // console.log(res);
+                set({user:res.data.data});
+                // console.log("go");
             }catch(err){
                 // console.log("Error while checking Auth:", err);
                 localStorage.removeItem("jwt");
