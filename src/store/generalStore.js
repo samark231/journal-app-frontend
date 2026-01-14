@@ -44,7 +44,10 @@ const useGeneralStore = create((set, get)=>({
     }, 
     handleClickOutSide: ()=>{
 
-    }
+    },
+    getInitials: (name) => {
+    return name ? name.charAt(0).toUpperCase() : "U";
+  }
 }))
 
 export default useGeneralStore;
