@@ -1,8 +1,8 @@
 import React, { useState } from "react";
-import useJournalStore from "../store/JournalStore";
-import "../styles/addJournal.css";
+import useJournalStore from "../../store/JournalStore";
+import "../../styles/home/addJournal.css";
 import {useShallow} from "zustand/react/shallow";
-import { JOURNAL_MODE } from "../utils/utils";
+import { JOURNAL_MODE } from "../../utils/utils";
 
 const AddJournal = () => {
     const {isSavingJournal, currentMode,saveJournal, newJournalEntry, handleSaveNewJournalEntry,updateJournal,enterUpdateMode, handleCancel} = useJournalStore(

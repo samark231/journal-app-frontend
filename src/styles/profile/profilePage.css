@@ -1,0 +1,263 @@
+Container Layout
+.pp-container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+  color: #333; /* Dark text for light mode */
+  background-color: #f4f6f8; /* Very light grey background for the whole page */
+  min-height: 100vh;
+}
+
+.pp-main {
+  display: flex;
+  gap: 30px;
+  margin-top: 20px;
+  flex-wrap: wrap; 
+}
+
+/* Common Card Style */
+.pp-card, .stat-card {
+  background-color: #ffffff; /* White cards */
+  border: 1px solid #e1e4e8; /* Subtle light border */
+  border-radius: 12px;
+  padding: 24px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05); /* Soft shadow */
+}
+
+/* --- LEFT SECTION: Personal --- */
+.pp-personal {
+  flex: 1;
+  min-width: 300px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.profile-identity {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 30px;
+}
+
+.avatar-circle {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  background: #007bff; /* Bright blue accent */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 40px;
+  font-weight: bold;
+  color: white;
+  margin-bottom: 10px;
+  border: 4px solid #f4f6f8; /* Matches page background to look 'cut out' */
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+.username {
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: #555;
+}
+
+.profile-form {
+  width: 100%;
+}
+
+.form-group {
+  margin-bottom: 15px;
+  display: flex;
+  flex-direction: row;
+  background-color: aliceblue;
+}
+
+.form-group label {
+  /* background-color: #007bff; */
+  width: 100px;
+  font-size: 1rem;
+  font-weight: 500;
+  margin-bottom: 5px;
+  color: #666;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.form-group input, 
+.form-group select {
+  width: 200px;
+  padding: 10px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  background-color: #f9f9f9; /* Slightly grey input background */
+  color: #333;
+  font-size: 1rem;
+  transition: border-color 0.2s;
+}
+
+.form-group input:focus, 
+.form-group select:focus {
+  outline: none;
+  border-color: #007bff; /* Blue border on focus */
+  background-color: #fff;
+}
+
+/* --- RIGHT SECTION: Stats --- */
+.pp-stats {
+  flex: 2;
+  min-width: 300px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* Heatmap Styling */
+.heatmap-container h3 {
+  margin-top: 0;
+  margin-bottom: 15px;
+  font-size: 1.1rem;
+  color: #333;
+  font-weight: 600;
+}
+
+.heatmap-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(30px, 1fr));
+  gap: 8px;
+}
+
+.heatmap-box {
+  width: 100%;
+  aspect-ratio: 1;
+  border-radius: 4px;
+}
+
+/* Heatmap Colors (GitHub Style) */
+.level-0 { background-color: #ebedf0; } /* Empty (Light Grey) */
+.level-1 { background-color: #9be9a8; } /* Light Green */
+.level-2 { background-color: #40c463; } /* Medium Green */
+.level-3 { background-color: #216e39; } /* Dark Green */
+
+/* Stats Grid */
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+
+.stat-card {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.stat-card h4 {
+  font-size: 1.8rem;
+  margin: 0;
+  color: #333;
+  font-weight: 700;
+}
+
+.stat-card p {
+  margin: 5px 0 0;
+  color: #666;
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-weight: 600;
+}
+
+/*icons */
+.stat-icon {
+  font-size: 2rem;
+  margin-bottom: 10px;
+}
+
+.edit-icon{
+  height: 30px;
+  width: 30px;
+  color: #bbcadf;
+}
+.check-icon{
+  height: 30px;
+  width: 30px;
+  color: rgb(97, 180, 97);
+}
+/* Header alignment for Identity and Edit Button */
+.profile-header {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+}
+
+/* The Bulk Edit Button */
+.edit-toggle-btn {
+  margin-bottom: 20px;
+  padding: 8px 16px;
+  border-radius: 20px;
+  border: 1px solid #007bff;
+  background: white;
+  color: #007bff;
+  cursor: pointer;
+  font-weight: 600;
+  transition: 0.3s;
+}
+
+.edit-toggle-btn:hover {
+  background: #007bff;
+  color: white;
+}
+
+.edit-toggle-btn.cancel {
+  border-color: #dc3545;
+  color: #dc3545;
+}
+
+.edit-toggle-btn.cancel:hover {
+  background: #dc3545;
+  color: white;
+}
+
+/* Style for when not in edit mode */
+.read-only-text {
+  width: 200px;
+  padding: 10px;
+  font-size: 1rem;
+  color: #333;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+}
+
+/* Save Button at the bottom */
+.save-btn {
+  width: 100%;
+  margin-top: 20px;
+  padding: 12px;
+  background-color: #28a745;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.save-btn:hover {
+  background-color: #218838;
+}
+
+/* Ensuring form group looks consistent */
+.form-group {
+  margin-bottom: 15px;
+  display: flex;
+  flex-direction: row;
+  border-bottom: 1px solid #f0f0f0; /* Added a subtle separator */
+}

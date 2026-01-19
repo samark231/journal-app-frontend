@@ -1,0 +1,42 @@
+.ph-container {
+    height: var(--header-height);
+    width: 100%;
+    background-color: var(--header-bg);
+    border-bottom: 1px solid var(--header-border);
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 0 1.5rem; /* Reduced padding slightly for better responsiveness */
+    box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-sizing: border-box;
+}
+
+/* --- Left: Brand --- */
+.ph-brand {
+    width: 50%;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    min-width: max-content; /* Ensure logo doesn't squish */
+}
+
+.ph-logo {
+    height: 48px; /* Adjusted slightly for proportion */
+    width: 48px;
+    object-fit: contain;
+}
+
+.ph-app-name {
+    font-size: 1.25rem;
+    font-weight: 800;
+    color: var(--text-color);
+    letter-spacing: -0.5px;
+    white-space: nowrap;
+}
+.ph-page-name{
+    height: 100%;
+    width: 50%;
+}

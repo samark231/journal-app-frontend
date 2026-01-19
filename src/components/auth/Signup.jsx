@@ -1,8 +1,10 @@
 import React, { useState } from "react";
-import useAuthStore from "../store/authStore";
+import useAuthStore from "../../store/authStore";
 import { useShallow } from "zustand/shallow";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSpinner } from '@fortawesome/free-solid-svg-icons';
+import "../../styles/auth/authPage.css";
+import { useNavigate } from "react-router-dom";
 
 const Signup = () => {
     const {signup, isSigningUp, isLoggingIn} = useAuthStore(useShallow(
@@ -24,17 +26,19 @@ const Signup = () => {
     const handleChange = (e) => {
         setFormData({ ...formData, [e.target.name]: e.target.value });
     };
-
-    const handleSubmit = (e) => {
+    const navigate = useNavigate();
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        signup(formData);
+        if(await signup(formData)){
+            navigate("/");
+        }
     };
 
     return (
         <form className="auth-form" onSubmit={handleSubmit}>
             <div style={{ display: 'flex', gap: '1rem' }}>
-                <div className="form-group" style={{ flex: 1 }}>
-                    <label className="form-label" htmlFor="firstName">First Name</label>
+                <div className="auth-form-group" style={{ flex: 1 }}>
+                    <label className="auth-form-label" htmlFor="firstName">First Name</label>
                     <input
                         className="auth-input"
                         type="text"
@@ -44,8 +48,8 @@ const Signup = () => {
                         required
                     />
                 </div>
-                <div className="form-group" style={{ flex: 1 }}>
-                    <label className="form-label" htmlFor="lastName">Last Name</label>
+                <div className="auth-form-group" style={{ flex: 1 }}>
+                    <label className="auth-form-label" htmlFor="lastName">Last Name</label>
                     <input
                         className="auth-input"
                         type="text"
@@ -57,8 +61,8 @@ const Signup = () => {
                 </div>
             </div>
 
-            <div className="form-group">
-                <label className="form-label" htmlFor="username">Username</label>
+            <div className="auth-form-group">
+                <label className="auth-form-label" htmlFor="username">Username</label>
                 <input
                     className="auth-input"
                     type="text"
@@ -69,8 +73,8 @@ const Signup = () => {
                 />
             </div>
 
-            <div className="form-group">
-                <label className="form-label" htmlFor="email">Email</label>
+            <div className="auth-form-group">
+                <label className="auth-form-label" htmlFor="email">Email</label>
                 <input
                     className="auth-input"
                     type="email"
@@ -82,8 +86,8 @@ const Signup = () => {
                 />
             </div>
 
-            <div className="form-group">
-                <label className="form-label" htmlFor="password">Password</label>
+            <div className="auth-form-group">
+                <label className="auth-form-label" htmlFor="password">Password</label>
                 <input
                     className="auth-input"
                     type="password"

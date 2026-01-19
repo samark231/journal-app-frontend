@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
-import Login from "../components/Login";
-import Signup from "../components/Signup";
-import "../styles/authPage.css"; // Point to the new single CSS file
+import Login from "../components/auth/Login";
+import Signup from "../components/auth/Signup";
+import "../styles/auth/authPage.css"; // Point to the new single CSS file
 import useGeneralStore from '../store/generalStore';
 import {useShallow} from "zustand/shallow";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';

@@ -1,22 +1,17 @@
 import React, { useEffect } from 'react';
-import JournalCard from '../components/JournalCard';
-import Header from "../components/Header.jsx";
-import Footer from "../components/Footer.jsx";
+import JournalCard from '../components/home/JournalCard';
+import Header from "../components/home/Header.jsx";
+import Footer from "../components/home/Footer.jsx";
 import useJournalStore from '../store/JournalStore.js';
-import AddJournal from '../components/AddJournal.jsx';
-import "../styles/homePage.css";
-import Dropdown from '../components/Dropdown.jsx';
+import AddJournal from '../components/home/AddJournal.jsx';
+import "../styles/home/homePage.css";
+import Dropdown from '../components/home/Dropdown.jsx';
 import useGeneralStore from '../store/generalStore.js';
 
 function HomePage() {
     const filteredJournals = useJournalStore(state => state.filteredJournals);
     const getAllJournals = useJournalStore(state => state.getAllJournals);
     const showDropdown = useGeneralStore(state=>state.showDropdown);
-
-    useEffect(() => {
-        // console.log("mounting homepage,calling getalljournals...");
-        getAllJournals();
-    }, []);
 
     return (
         <div className='homePage-container'>

@@ -1,7 +1,7 @@
 import React from 'react'
 import {Visibility, Edit, DeleteForever, Archive} from '@mui/icons-material';
-import "../styles/journalCard.css"
-import useJournalStore from '../store/JournalStore';
+import "../../styles/home/journalCard.css"
+import useJournalStore from '../../store/JournalStore';
 import { useShallow } from 'zustand/react/shallow';
 
 function JournalCard({entry}) {

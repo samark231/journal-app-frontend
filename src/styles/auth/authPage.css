@@ -56,13 +56,13 @@
     gap: 1.25rem;
 }
 
-.form-group {
+.auth-form-group {
     display: flex;
     flex-direction: column;
     gap: 0.5rem;
 }
 
-.form-label {
+.auth-form-label {
     font-size: 0.85rem;
     font-weight: 600;
     color: var(--auth-text);

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import "../styles/header.css";
+import "../../styles/home/header.css";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { 
   faArrowRightFromBracket, 
@@ -8,10 +8,10 @@ import {
   faHeartPulse,
   faXmark 
 } from '@fortawesome/free-solid-svg-icons';
-import appLogo from "../assets/logo/logo_64x64.png";
-import useAuthStore from '../store/authStore';
-import useGeneralStore from '../store/generalStore';
-import useJournalStore from '../store/JournalStore';
+import appLogo from "../../assets/logo/logo_64x64.png";
+import useAuthStore from '../../store/authStore';
+import useGeneralStore from '../../store/generalStore';
+import useJournalStore from '../../store/JournalStore';
 import {useShallow} from "zustand/shallow";
 
 function Header() {

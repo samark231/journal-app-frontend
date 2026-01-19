@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
-import useAuthStore from '../store/authStore';
+import useAuthStore from '../../store/authStore';
 import {useShallow} from "zustand/shallow";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSpinner } from '@fortawesome/free-solid-svg-icons';
-import "../styles/authPage.css";
+import "../../styles/auth/authPage.css";
+import { Navigate, useNavigate } from 'react-router-dom';
 
 function Login() {
     const {login, isLoggingIn} = useAuthStore(useShallow(
@@ -16,10 +17,13 @@ function Login() {
         usernameOrEmail: "",
         password: ""
     });
-
-    const handleSubmit = (e) => {
+    const navigate = useNavigate();
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        login(formData);
+
+        if(await login(formData)){
+            navigate("/");
+        }
     };
 
     const handleChangeValue = (e) => {
@@ -28,8 +32,8 @@ function Login() {
 
     return (
         <form className="auth-form" onSubmit={handleSubmit}>
-            <div className="form-group">
-                <label className="form-label" htmlFor="usernameOrEmail">Username or Email</label>
+            <div className="auth-form-group">
+                <label className="auth-form-label" htmlFor="usernameOrEmail">Username or Email</label>
                 <input
                     className="auth-input"
                     type="text"
@@ -42,8 +46,8 @@ function Login() {
                 />
             </div>
             
-            <div className="form-group">
-                <label className="form-label" htmlFor="password">Password</label>
+            <div className="auth-form-group">
+                <label className="auth-form-label" htmlFor="password">Password</label>
                 <input
                     className="auth-input"
                     type="password"

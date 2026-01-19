@@ -27,8 +27,10 @@ const useAuthStore = create(persist(
                 console.log(res.data.data);
                 localStorage.setItem("jwt", res.data.data.jwt);
                 set({user:res.data.data.userData});
+                return true;
             }catch(err){
                 console.log("Error while loggin in: ", err);
+                return false;
             }finally{
                 set({isLoggingIn:false});
             }
@@ -46,7 +48,7 @@ const useAuthStore = create(persist(
                     error:"Could not create your account...",
                 })
                 const res = await signupPromise;
-                await get().login({"usernameOrEmail": formData.username, "password": formData.password});
+                return await get().login({"usernameOrEmail": formData.username, "password": formData.password});
             }catch(err){
                 console.log("Error while signing up:", err.response.data||err);
                 throw err;

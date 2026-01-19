@@ -1,5 +1,5 @@
 import React from 'react';
-import "../styles/dropdown.css";
+import "../../styles/home/dropdown.css";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { 
   faUserPen, 
@@ -9,11 +9,18 @@ import {
   faXmark,
   faShieldHalved
 } from '@fortawesome/free-solid-svg-icons';
-import useAuthStore from '../store/authStore';
-import useGeneralStore from '../store/generalStore';
+import useAuthStore from '../../store/authStore';
+import useGeneralStore from '../../store/generalStore';
 import { useShallow } from 'zustand/shallow';
+import { useNavigate } from 'react-router-dom';
+
 
 const Dropdown = () => {
+    const navigate = useNavigate();
+    const handleNavigation = (path)=>{
+        toggleShowDropdown();
+        navigate(path)
+    }
   const user = useAuthStore((state) => state.user);
   const logout = useAuthStore((state) => state.logout);
   
@@ -63,9 +70,9 @@ const Dropdown = () => {
 
         {/* Menu Links */}
         <section className='dropdown-links'>
-            <button className="menu-item">
+            <button className="menu-item" onClick={()=>handleNavigation("/profile")}>
                 <FontAwesomeIcon icon={faUserPen} className="menu-icon" />
-                <span>Edit Profile</span>
+                <span>Profile</span>
             </button>
             
             <button className="menu-item">

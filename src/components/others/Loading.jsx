@@ -1,5 +1,5 @@
 import React from 'react'
-import "../styles/app.css"
+import "../../styles/app.css"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faSpinner } from '@fortawesome/free-solid-svg-icons'
 

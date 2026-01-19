@@ -5,6 +5,7 @@ import toast from "react-hot-toast";
 
 const useGeneralStore = create((set, get)=>({
     backendStatus:"idle", 
+    heatMapData: [],
     handleHealthCheck :async () => {
         set({backendStatus:'checking'});
         try {
@@ -46,8 +47,26 @@ const useGeneralStore = create((set, get)=>({
 
     },
     getInitials: (name) => {
-    return name ? name.charAt(0).toUpperCase() : "U";
-  }
+        return name ? name.charAt(0).toUpperCase() : "U";
+    },
+    getHeatMapData :async ()=>{
+        try{
+            // console.log("getHeapMapData is called...");
+            const res = await api.get("/journal/heat-map");
+            const backendData = res.data.data;
+            // console.log(backendData);
+            const heatMapObj = backendData.reduce((acc, el)=>{
+                acc[el.date] = el.count;
+                return acc;
+            },{})
+            set({heatMapData:heatMapObj});
+            // console.log(get().heatMapData);
+        }catch(error){
+            console.log("error occured in getHeatMapData", error);
+        }
+        
+    }
+
 }))
 
 export default useGeneralStore;

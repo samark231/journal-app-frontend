@@ -26,7 +26,7 @@ const useJournalStore = create(
                 const res = await api.get("/journal/all-entries");
                 set({journals:res.data.data});
                 set({filteredJournals:res.data.data});
-                // console.log("gettng all journals...",res.data);
+                console.log("gettng all journals...",get().journals);
             }catch(err){
                 console.log("Error while fetching all journals", err);
                 toast.error("could not fetch all journals");
@@ -34,10 +34,6 @@ const useJournalStore = create(
         } ,
         saveJournal: async ()=>{
             try{
-                // set({newJournalEntry: {
-                //     ...get().newJournalEntry, date:useGeneralStore.getState().getDateInLocalIsoFormat()
-                // }})
-                // console.log("this is journal entry with updated date: ",get().newJournalEntry);
                 set({isSavingJournal:true})
                 const res = await api.post("/journal", get().newJournalEntry);
                 // console.log(res.data);
