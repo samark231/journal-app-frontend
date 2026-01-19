@@ -22,6 +22,9 @@
     gap: 12px;
     min-width: max-content; /* Ensure logo doesn't squish */
 }
+.ph-logo:hover{
+    cursor: pointer;
+}
 
 .ph-logo {
     height: 48px; /* Adjusted slightly for proportion */

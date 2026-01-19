@@ -24,16 +24,11 @@ const Dropdown = () => {
   const user = useAuthStore((state) => state.user);
   const logout = useAuthStore((state) => state.logout);
   
-  // Get state and toggle function from General Store
   const { showDropdown, toggleShowDropdown, getInitials } = useGeneralStore(useShallow((state) => ({
     showDropdown: state.showDropdown,
     toggleShowDropdown: state.toggleShowDropdown,
     getInitials:state.getInitials
   })));
-
-  // If menu is closed, we can return null OR keep it in DOM for animation. 
-  // Keeping it in DOM allows the slide-out animation to finish.
-  // We handle visibility via CSS classes.
 
   return (
     <>
@@ -75,20 +70,20 @@ const Dropdown = () => {
                 <span>Profile</span>
             </button>
             
-            <button className="menu-item">
+            {/* <button className="menu-item">
                 <FontAwesomeIcon icon={faKey} className="menu-icon" />
                 <span>Change Password</span>
-            </button>
+            </button> */}
             
-            <button className="menu-item">
+            {/* <button className="menu-item">
                 <FontAwesomeIcon icon={faChartLine} className="menu-icon" />
                 <span>Analytics</span>
             </button>
-            
-            <button className="menu-item">
+             */}
+            {/* <button className="menu-item">
                 <FontAwesomeIcon icon={faShieldHalved} className="menu-icon" />
                 <span>Admin Dashboard</span>
-            </button>
+            </button> */}
         </section>
 
         {/* Footer / Logout */}
