@@ -21,7 +21,6 @@ const ProfileDetails = () => {
   });
 
   const handleToggleEdit = () => {
-    // If canceling edit, you might want to reset formData to user store values here
     setEditProfile((prev) => !prev);
   };
 
@@ -63,7 +62,7 @@ const ProfileDetails = () => {
           {editProfile ? (
             <input type="text" name="firstName" value={formData.firstName} onChange={handleChange} />
           ) : (
-            <span className="read-only-text">{formData.firstName}</span>
+            <span className="read-only-text">{user.firstName}</span>
           )}
         </div>
 
@@ -73,7 +72,7 @@ const ProfileDetails = () => {
           {editProfile ? (
             <input type="text" name="lastName" value={formData.lastName} onChange={handleChange} />
           ) : (
-            <span className="read-only-text">{formData.lastName}</span>
+            <span className="read-only-text">{user.lastName}</span>
           )}
         </div>
 
@@ -83,7 +82,7 @@ const ProfileDetails = () => {
           {editProfile ? (
             <input type="email" name="email" value={formData.email} onChange={handleChange} />
           ) : (
-            <span className="read-only-text">{formData.email}</span>
+            <span className="read-only-text">{user.email}</span>
           )}
         </div>
 
@@ -93,7 +92,7 @@ const ProfileDetails = () => {
           {editProfile ? (
             <input type="date" name="dob" value={formData.dob} onChange={handleChange} />
           ) : (
-            <span className="read-only-text">{formData.dob}</span>
+            <span className="read-only-text">{user.dob}</span>
           )}
         </div>
 
@@ -109,7 +108,7 @@ const ProfileDetails = () => {
               <option value={GENDER.PREFER_NOT_TO_SAY}>Prefer not saying</option>
             </select>
           ) : (
-            <span className="read-only-text" style={{textTransform: 'capitalize'}}>{formData.gender}</span>
+            <span className="read-only-text" style={{textTransform: 'capitalize'}}>{user.gender}</span>
           )}
         </div>
 

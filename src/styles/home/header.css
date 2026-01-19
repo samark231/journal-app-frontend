@@ -35,6 +35,9 @@
     width: 48px;
     object-fit: contain;
 }
+.header-logo:hover{
+    cursor: pointer;
+}
 
 .header-app-name {
     font-size: 1.25rem;
@@ -43,7 +46,9 @@
     letter-spacing: -0.5px;
     white-space: nowrap;
 }
-
+.header-app-name:hover{
+    cursor: pointer;
+}
 /* --- Center: Search Bar --- */
 .header-search {
     flex: 1;

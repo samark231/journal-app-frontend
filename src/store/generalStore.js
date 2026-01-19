@@ -6,11 +6,12 @@ import toast from "react-hot-toast";
 const useGeneralStore = create((set, get)=>({
     backendStatus:"idle", 
     heatMapData: [],
+    showDropdown:false,
     handleHealthCheck :async () => {
         set({backendStatus:'checking'});
         try {
             const res = await get().healthCheck();
-            console.log(res.data);
+            // console.log(res.data);
             set({backendStatus:res.data});
             setTimeout(() => set({backendStatus:"idle"}), 3000);
         } catch (err) {
@@ -36,7 +37,7 @@ const useGeneralStore = create((set, get)=>({
     },
     getDateInLocalIsoFormat: ()=>{
         const localDate = new Date();
-        const offset = localDate.getTimezoneOffset() * 60000;
+        const offseshowDropdownt = localDate.getTimezoneOffset() * 60000;
         const localISO = new Date(localDate.getTime() - offset).toISOString().slice(0, -1);
         return localISO;
     },

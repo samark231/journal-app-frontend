@@ -17,9 +17,9 @@ const calculateSreaks = ()=>{
 }
 const ProfileStats = () => {
   const journals = useJournalStore(state=>state.journals);
-  console.log(journals);
+  // console.log(journals);
   const totalWords = calculateTotalWordsInJournals(journals);
-  console.log(totalWords);
+  // console.log(totalWords);
   const streaks = calculateSreaks(journals);
   return (
     <section className='pp-stats'>

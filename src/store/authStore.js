@@ -3,6 +3,7 @@ import api from "../api/axios";
 import useJournalStore from "./JournalStore";
 import { persist } from "zustand/middleware";
 import toast from "react-hot-toast";
+import useGeneralStore from "./generalStore";
 
 const useAuthStore = create(persist(
     (set, get)=>({
@@ -61,6 +62,7 @@ const useAuthStore = create(persist(
             try{
                 localStorage.removeItem("jwt");
                 set({user:null});
+                useGeneralStore.setState({showDropdown:false});
                 useJournalStore.getState().cacheReset();
                 toast.success("Logged out successfully.");
                 // console.log("Logged out successfully.");
@@ -79,7 +81,7 @@ const useAuthStore = create(persist(
                     return;
                 }
                 const res = await api.get("/user/check-auth");
-                console.log("checking auth...", res.data);
+                // console.log("checking auth...", res.data);
                 set({user:res.data.data});
                 // console.log("go");
             }catch(err){

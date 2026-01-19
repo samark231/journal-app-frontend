@@ -26,7 +26,7 @@ const useJournalStore = create(
                 const res = await api.get("/journal/all-entries");
                 set({journals:res.data.data});
                 set({filteredJournals:res.data.data});
-                console.log("gettng all journals...",get().journals);
+                // console.log("gettng all journals...",get().journals);
             }catch(err){
                 console.log("Error while fetching all journals", err);
                 toast.error("could not fetch all journals");
